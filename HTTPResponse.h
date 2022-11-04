@@ -8,8 +8,8 @@
 #include "Servlet.h"
 
 class HTTPResponse : public Servlet{
-    void doPost(char request, char response) override;
-    void doGet(char request, char response) override;
+    void doPost(int sock, char request, char response) override;
+    void doGet(int sock, char request, char response) override;
 };
 
 

@@ -1,4 +1,5 @@
 #include "Socket.h"
+#include "FileUploadServlet.h"
 #include <sys/types.h>
 #include <resolv.h>
 #include <unistd.h>
@@ -24,27 +25,13 @@ char* Socket::getRequest()
 void Socket::sendResponse(char *res){
 int rval;
 
-  if ((rval = write(sock, res, strlen(res))) < 0){
-    perror("writing socket");
-  }else  {
-      char arr[]= "HTTP/1.1 200 OK\r\n"
-                "Connection: close\r\n"
-                "Content-type: text/html\r\n"
-                "\r\n"
-                "<html>\r\n"
-                "<head>\r\n"
-                "<title>Hello, world!</title>\r\n"
-                "</head>\r\n"
-                "<body>\r\n"
-                "<h1>Hello, world!</h1>\r\n"
-                "</body>\r\n"
-                "</html>\r\n\r\n";
-//      write(sock, arr, strlen(res));
-//  printf(arr);
-//    int send_res = send(sock,arr,strlen(arr),0);
-//    printf("%s\n",arr);
-  }
-
+//  if ((rval = write(sock, res, strlen(res))) < 0){
+//    perror("writing socket");
+//  }else  {
+      FileUploadServlet *upload = new FileUploadServlet();
+      char req;
+      upload->doGet(sock, req, *res);
+    close (sock);
 	return;
 }
 

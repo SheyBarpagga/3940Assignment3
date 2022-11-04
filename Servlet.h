@@ -7,8 +7,8 @@
 
 
 class Servlet {
-    virtual void doGet(char request, char response);
-    virtual void doPost(char request, char response);
+    virtual void doGet(int sock, char request, char response);
+    virtual void doPost(int sock, char request, char response);
 };
 
 

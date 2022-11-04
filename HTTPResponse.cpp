@@ -4,10 +4,10 @@
 
 #include "HTTPResponse.h"
 
-void HTTPResponse::doPost(char request, char response) {
+void HTTPResponse::doPost(int sock, char request, char response) {
 
 }
 
-void HTTPResponse::doGet(char request, char response) {
+void HTTPResponse::doGet(int sock, char request, char response) {
 
 }

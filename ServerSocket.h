@@ -6,7 +6,7 @@ public:
 	ServerSocket(int port);
 	Socket* Accept();
 	~ServerSocket();
-private:
-	int sock;
+
+    int sock;
 };
 

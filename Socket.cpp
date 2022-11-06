@@ -19,7 +19,8 @@ char* Socket::getRequest()
     perror("reading socket");
   }else  {
       printf("%s\n", "The server is printing this because there was a get request!");
-    printf("%s\n",buf);
+      printf("%s\n",buf);
+      printf("Reading from buffer (on GET request) done\n");
   }
 	return buf;
 }

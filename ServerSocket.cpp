@@ -55,6 +55,7 @@ Socket* ServerSocket::Accept()
 
     // New socket is created based on 'sock', 'sock' still remains open after this.
 	Socket *cs = new Socket(cSock);
+    std::cout << "The server has accepted an incoming connection with descriptor " + to_string(cSock) << endl;
 	return cs;
 }
 ServerSocket::~ServerSocket()

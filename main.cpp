@@ -8,8 +8,10 @@
 #include <sys/socket.h>
 #include <stdio.h>
 
+#define PORT 8888
+
 int main() {
-  ServerSocket *ss = new ServerSocket(8888);
+  ServerSocket *ss = new ServerSocket(PORT);
 	if (ss != NULL) {
         while(true) {
             Socket *cs = ss->Accept();

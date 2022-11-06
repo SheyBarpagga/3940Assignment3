@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#define PORT 8888
+
 ServerSocket::ServerSocket(int port)
 {
     sock = socket (AF_INET, SOCK_STREAM, 0);
@@ -19,7 +21,7 @@ ServerSocket::ServerSocket(int port)
     struct sockaddr_in server;
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = htonl(INADDR_ANY);
-    server.sin_port = htons(8888);
+    server.sin_port = htons(PORT);
     //  Uncomment the call to inet_aton when we want to connect to a specific IP address (instead of localhost).
     //  Make sure to put in the right IP address - 192.168.1.128 is just a placeholder
 
@@ -35,7 +37,7 @@ ServerSocket::ServerSocket(int port)
         perror ("binding stream socket");
     }
 
-    getsockname( sock, (struct sockaddr *) &server,(socklen_t *)sizeof server);
+    getsockname( sock, (struct sockaddr *) &server,(socklen_t *) sizeof server);
     cout << "listening" << endl;
     listen(sock, 5);
 
@@ -43,6 +45,7 @@ ServerSocket::ServerSocket(int port)
 
 Socket* ServerSocket::Accept()
 {
+    // What's localAddr supposed to do?
 	sockaddr_in localAddr, remoteAddr;
 	int addrLen = sizeof (remoteAddr);
 	int cSock = accept(sock, (struct sockaddr *)&remoteAddr, &addrLen);

@@ -10,6 +10,10 @@
 #include <resolv.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 void FileUploadServlet::doGet(int sock, char request, char response) {
 //    ServerSocket *ss = new ServerSocket(8888);
@@ -105,4 +109,5 @@ void FileUploadServlet::doPost(int sock, char request, char response) {
     // Upon submitting form, POST method is invoked.
     // Submitting the form should save the file (and all other form data i.e caption and date) in the server's own
     // internal file system. The additional date will be saved in the title of the file
+    cout << "The server is processing a POST request" << endl;
 }

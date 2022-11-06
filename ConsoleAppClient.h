@@ -10,6 +10,10 @@
 
 class ConsoleAppClient {
 
+public:
+    void doGet(int sock, char request, char response);
+    void doPost(int sock, char request, char response);
+
 };
 
 

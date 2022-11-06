@@ -18,6 +18,7 @@ char* Socket::getRequest()
   if ((rval = read(sock, buf, 1024)) < 0){
     perror("reading socket");
   }else  {
+      printf("%s\n", "The server is printing this because there was a get request!");
     printf("%s\n",buf);
   }
 	return buf;
@@ -28,6 +29,7 @@ int rval;
 //  if ((rval = write(sock, res, strlen(res))) < 0){
 //    perror("writing socket");
 //  }else  {
+    printf("%s\n", "The server is sending a response!");
       FileUploadServlet *upload = new FileUploadServlet();
       char req;
       upload->doGet(sock, req, *res);

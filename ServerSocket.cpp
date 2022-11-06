@@ -48,7 +48,12 @@ Socket* ServerSocket::Accept()
     // What's localAddr supposed to do?
 	sockaddr_in localAddr, remoteAddr;
 	int addrLen = sizeof (remoteAddr);
+
+    //sock must be bound and listening. We have already taken care of this in ServerSocket constructor
+    // If socket is not marked as non-blocking and there are no potential socket connections waiting, accept() blocks caller.
 	int cSock = accept(sock, (struct sockaddr *)&remoteAddr, &addrLen);
+
+    // New socket is created based on 'sock', 'sock' still remains open after this.
 	Socket *cs = new Socket(cSock);
 	return cs;
 }

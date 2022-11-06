@@ -102,5 +102,7 @@ void FileUploadServlet::doGet(int sock, char request, char response) {
 }
 
 void FileUploadServlet::doPost(int sock, char request, char response) {
-
+    // Upon submitting form, POST method is invoked.
+    // Submitting the form should save the file (and all other form data i.e caption and date) in the server's own
+    // internal file system. The additional date will be saved in the title of the file
 }

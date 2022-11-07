@@ -109,10 +109,10 @@ void FileUploadServlet::doGet(int sock, char request, char response) {
    // }
 }
 
-void FileUploadServlet::doPost(int sock, char request, char response) {
-    char buf[10000];
-    int bytes = readn(sock, buf, sizeof(buf));
-    cout << bytes <<endl;
+void FileUploadServlet::doPost(int sock, char *request, char *response) {
+
+    cout << "bytes" << strlen(request) <<endl;
+//    doGet(sock, *request, *response);
 }
 
 
@@ -121,16 +121,17 @@ int FileUploadServlet::readn(int fd, void *buf, int n) {
     char *p = (char*)buf;
     char *q = (char*)buf + n;
 
-    while(p < q) {
-        if ((nread = read(fd, p, q-p)) < 0) {
-            if(errno == EINTR)
-                continue;
-            else
-                return -1;
-        } else if (nread == 0)
-            break;
-        p += nread;
-    }
+//    while(p < q) {
+//        if ((nread = read(fd, p, q-p)) < 0) {
+//            if(errno == EINTR)
+//                continue;
+//            else
+//                return -1;
+//        } else if (nread == 0)
+//            break;
+//        p += nread;
+//    }
+    close (fd);
     return p - (char*) buf;
     // Upon submitting form, POST method is invoked.
     // Submitting the form should save the file (and all other form data i.e caption and date) in the server's own

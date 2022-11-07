@@ -17,7 +17,7 @@ int main() {
             Socket *cs = ss->Accept();
             char *res = new char(50);
             char *req = cs->getRequest();
-            cs->sendResponse(res);
+//            cs->sendResponse(res);
 
         }
 

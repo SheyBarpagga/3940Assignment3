@@ -11,7 +11,7 @@ class FileUploadServlet {
 
 public:
     void doGet(int sock, char request, char response);
-    void doPost(int sock, char request, char response);
+    void doPost(int sock, char *request, char *response);
     int readn(int fd, void* buf, int n);
 };
 

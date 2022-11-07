@@ -6,7 +6,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <cerrno>
-
+#include <iostream>
+using namespace std;
 Socket::Socket(int sock)
 {
 	this->sock = sock;
@@ -18,17 +19,21 @@ char* Socket::getRequest()
   if ((rval = read(sock, buf, 1024)) < 0){
     perror("reading socket");
   }else  {
-      printf("%s\n", "The server is printing this because there was a get request!");
-      printf("%s\n",buf);
-      printf("Reading from buffer (on GET request) done\n");
-      int i = 0;
-      while ((rval = read(sock, buf, 1)) == 1) {
-          buf1[i] = buf[0];
-          i++;
-          //putchar(buf);  //you can uncomment it to debug
-      }
-      buf1[i] = '\0';
-      close(sock);
+    cout << buf << endl;
+//      FileUploadServlet *up = new FileUploadServlet();
+//      up->doPost(sock, *buf, *buf1);
+      close (sock);
+//      printf("%s\n", "The server is printing this because there was a get request!");
+//      printf("%s\n",buf);
+//      printf("Reading from buffer (on GET request) done\n");
+//      int i = 0;
+//      while ((rval = read(sock, buf, 1)) == 1) {
+//          buf1[i] = buf[0];
+//          i++;
+////          putchar(buf);  //you can uncomment it to debug
+//      }
+//      buf1[i] = '\0';
+//      close(sock);
 //      int nread;
 //      char *p = (char*)buf;
 //      char *q = (char*)buf + n;

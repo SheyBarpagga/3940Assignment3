@@ -14,6 +14,10 @@
 #include <iostream>
 
 using namespace std;
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 void FileUploadServlet::doGet(int sock, char request, char response) {
 //    ServerSocket *ss = new ServerSocket(8888);
@@ -91,7 +95,7 @@ void FileUploadServlet::doGet(int sock, char request, char response) {
                     "</head>\r\n"
                     "<body>\r\n"
                     "<h1>Upload file</h1>"
-                    "<form method=\"POST\" enctype=\"multipart/form-data\">"
+                    "<form method=\"POST\" type=\"multipart/form-data\">"
                     "<input type=\"file\" name=\"fileName\"/><br/><br/>"
                     "            Caption: <input type=\"text\" name=\"caption\"<br/><br/>"
                     "            <br />"
@@ -128,4 +132,8 @@ int FileUploadServlet::readn(int fd, void *buf, int n) {
         p += nread;
     }
     return p - (char*) buf;
+    // Upon submitting form, POST method is invoked.
+    // Submitting the form should save the file (and all other form data i.e caption and date) in the server's own
+    // internal file system. The additional date will be saved in the title of the file
+    cout << "The File Upload Servlet is processing a POST request" << endl;
 }

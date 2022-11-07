@@ -14,4 +14,4 @@ add_executable(Assignment3_3940
         Thread.cpp
         Thread.h
         SimpleThread.cpp
-        SimpleThread.h Servlet.h HTTPResponse.cpp HTTPResponse.h HTTPRequest.cpp HTTPRequest.h FileUploadServlet.cpp FileUploadServlet.h)
+        SimpleThread.h Servlet.h HTTPResponse.cpp HTTPResponse.h HTTPRequest.cpp HTTPRequest.h FileUploadServlet.cpp FileUploadServlet.h ConsoleAppClient.cpp ConsoleAppClient.h)

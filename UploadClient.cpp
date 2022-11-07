@@ -10,6 +10,7 @@
 #include "Socket.h"
 #include <iostream>
 #include <ostream>
+#include <fstream>
 
 using std::cout;
 using std::endl;
@@ -19,12 +20,13 @@ void UploadClient::getInput(){
     // If we wrap this in getline, it will be able to accept spaces
     cout << "Enter file path: " << endl;
     cin >> filePath;
+    cout << "Enter date for file: " << endl;
+    cin >> fileDate;
     cout << "Enter keyword for file: " << endl;
     cin >> keyWord;
     cout << "Enter caption for file: " << endl;
-    cin >> fileCaption;
-    cout << "Enter date for file: " << endl;
-    cin >> fileDate;
+    cin.ignore();
+    getline(cin, fileCaption);
 }
 
 void UploadClient::doPost(){
@@ -50,6 +52,33 @@ void UploadClient::doPost(){
         perror("Error connecting");
     }
 
+    DIR *directory;
+    directory = opendir(filePath.c_str());
+    ifstream myFile;
+    myFile.open(filePath, ios::binary);
+
+    string writer;
+    string newLine = "\r\n";
+
+    writer.append("-----------------------------").append(newLine);
+    writer.append("File Uploaded: ").append(newLine).append(newLine);
+    writer.append("filename=\"").append("File").append("\"").append(newLine);
+
+    writer.append("-----------------------------").append(newLine);
+    writer.append("File Date: ").append(newLine);
+    writer.append(newLine).append(fileDate).append(newLine);
+
+    writer.append("-----------------------------").append(newLine);
+    writer.append("File Keyword: ").append(newLine);
+    writer.append(newLine).append(keyWord).append(newLine);
+
+    writer.append("-----------------------------").append(newLine);
+    writer.append("File Caption: ").append(newLine);
+    writer.append(newLine).append(fileCaption).append(newLine);
+    writer.append("-----------------------------").append(newLine);
+
+    cout << writer << endl;
+
     if((rval = write(sock, "Hello server, from client", 1024)) < 0){
         perror("Error writing to sock");
     }
@@ -58,6 +87,6 @@ void UploadClient::doPost(){
 
 int main(){
     UploadClient *c = new UploadClient();
-    //c->getInput();
+    c->getInput();
     c->doPost();
 }

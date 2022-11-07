@@ -27,9 +27,9 @@ char* Socket::getRequest()
 void Socket::sendResponse(char *res){
 int rval;
 
-//  if ((rval = write(sock, res, strlen(res))) < 0){
-//    perror("writing socket");
-//  }else  {
+  if ((rval = write(sock, res, strlen(res))) < 0){
+    perror("writing socket");
+  }else  {
     printf("%s\n", "The server is sending a response!");
       FileUploadServlet *upload = new FileUploadServlet();
       char req;

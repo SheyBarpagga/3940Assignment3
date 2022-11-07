@@ -32,7 +32,6 @@ ServerSocket::ServerSocket(int port)
     getsockname( sock, (struct sockaddr *) &server,(socklen_t *)sizeof server);
     cout << "listening" << endl;
     listen(sock, 5);
-
 }
 
 Socket* ServerSocket::Accept()

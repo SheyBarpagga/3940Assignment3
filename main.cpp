@@ -13,9 +13,10 @@ int main() {
 	if (ss != NULL) {
         while(true) {
             Socket *cs = ss->Accept();
-            char *req = cs->getRequest();
             char *res = new char(50);
+            char *req = cs->getRequest();
             cs->sendResponse(res);
+
         }
 
 //        char arr[]= "HTTP/1.1 200 OK\r\n"

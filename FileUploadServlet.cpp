@@ -10,6 +10,10 @@
 #include <resolv.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <cerrno>
+#include <iostream>
+
+using namespace std;
 
 void FileUploadServlet::doGet(int sock, char request, char response) {
 //    ServerSocket *ss = new ServerSocket(8888);
@@ -87,7 +91,7 @@ void FileUploadServlet::doGet(int sock, char request, char response) {
                     "</head>\r\n"
                     "<body>\r\n"
                     "<h1>Upload file</h1>"
-                    "<form method=\"POST\" type=\"multipart/form-data\">"
+                    "<form method=\"POST\" enctype=\"multipart/form-data\">"
                     "<input type=\"file\" name=\"fileName\"/><br/><br/>"
                     "            Caption: <input type=\"text\" name=\"caption\"<br/><br/>"
                     "            <br />"
@@ -102,5 +106,26 @@ void FileUploadServlet::doGet(int sock, char request, char response) {
 }
 
 void FileUploadServlet::doPost(int sock, char request, char response) {
+    char buf[10000];
+    int bytes = readn(sock, buf, sizeof(buf));
+    cout << bytes <<endl;
+}
 
+
+int FileUploadServlet::readn(int fd, void *buf, int n) {
+    int nread;
+    char *p = (char*)buf;
+    char *q = (char*)buf + n;
+
+    while(p < q) {
+        if ((nread = read(fd, p, q-p)) < 0) {
+            if(errno == EINTR)
+                continue;
+            else
+                return -1;
+        } else if (nread == 0)
+            break;
+        p += nread;
+    }
+    return p - (char*) buf;
 }

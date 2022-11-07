@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <cerrno>
 
 Socket::Socket(int sock)
 {
@@ -12,15 +13,41 @@ Socket::Socket(int sock)
 }
 char* Socket::getRequest()
 {
-  int rval;
-  char *buf = new char[1024];
-
+  int rval;      char buf1[526336];      char buf[1];
+//    char *buf = new char[1024];
   if ((rval = read(sock, buf, 1024)) < 0){
     perror("reading socket");
-  }else  {
-    printf("%s\n",buf);
+  } else {
+      int i = 0;
+      while ((rval = read(sock, buf, 1)) == 1) {
+          buf1[i] = buf[0];
+          i++;
+          //putchar(buf);  //you can uncomment it to debug
+      }
+      buf1[i] = '\0';
+      close(sock);
+//      int nread;
+//      char *p = (char*)buf;
+//      char *q = (char*)buf + n;
+//
+//      while(p < q) {
+//          if ((nread = read(sock, p, q-p)) < 0) {
+//              if(errno == EINTR)
+//                  continue;
+//              else
+//                  return buf;
+//          } else if (nread == 0)
+//              break;
+//          p += nread;
+//      }
+//      return p - (char*) buf;
+//      FileUploadServlet *get = new FileUploadServlet();
+//      get->doPost(sock, *buf, *buf);
+//      close(sock);
+//    printf("%s\n",buf);
   }
-	return buf;
+  char* f;
+	return f;
 }
 void Socket::sendResponse(char *res){
 int rval;

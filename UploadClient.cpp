@@ -16,6 +16,7 @@ using namespace std;
 
 
 void UploadClient::getInput(){
+    // If we wrap this in getline, it will be able to accept spaces
     cout << "Enter file path: " << endl;
     cin >> filePath;
     cout << "Enter keyword for file: " << endl;
